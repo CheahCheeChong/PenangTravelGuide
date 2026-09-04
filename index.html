@@ -170,10 +170,11 @@
   .card{
     position:relative;border:1px solid var(--line);border-radius:var(--r);
     background:linear-gradient(160deg,rgba(247,242,232,.055),rgba(247,242,232,.015));
-    overflow:hidden;
+    overflow:hidden;scroll-margin-top:100px;
     transition:transform .5s cubic-bezier(.16,1,.3,1),border-color .5s,box-shadow .5s;
     display:flex;flex-direction:column;
   }
+  .card:target{border-color:rgba(201,162,39,.75);box-shadow:0 0 0 1px rgba(201,162,39,.35),var(--shadow)}
   .card::before{
     content:"";position:absolute;inset:0;opacity:0;transition:opacity .5s;z-index:2;
     background:radial-gradient(500px 260px at var(--mx,50%) var(--my,0%),rgba(201,162,39,.16),transparent 70%);
@@ -236,9 +237,18 @@
   .cluster-note{color:var(--muted);font-size:.9rem;font-weight:300;line-height:1.7}
   .cluster-list{list-style:none;margin:20px 0;padding:0;border-top:1px solid var(--line)}
   .cluster-list li{
-    display:flex;align-items:baseline;gap:12px;padding:12px 0;
     border-bottom:1px solid var(--line);font-size:.95rem;color:var(--cream);
   }
+  .cluster-list a,.cluster-list .plain{
+    display:flex;align-items:baseline;gap:12px;padding:12px 0;
+    text-decoration:none;color:inherit;transition:color .3s,padding-left .3s;
+  }
+  .cluster-list a:hover{color:var(--gold-lt);padding-left:6px}
+  .cluster-list a::after{
+    content:"\2192";margin-left:auto;flex:none;color:var(--gold);
+    opacity:0;transform:translateX(-6px);transition:opacity .3s,transform .3s;
+  }
+  .cluster-list a:hover::after{opacity:1;transform:translateX(0)}
   .cluster-list li span{
     font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--gold);
     min-width:26px;flex:none;
@@ -349,7 +359,7 @@
 
   <div class="places">
 
-    <article class="card reveal">
+    <article class="card reveal" id="stop-01">
       <div class="thumb">
         <img src="images/penang-hill.jpg" alt="The Penang Hill funicular track descending toward George Town" loading="lazy" />
         <div class="num">01</div>
@@ -372,7 +382,7 @@
       </div>
     </article>
 
-    <article class="card reveal">
+    <article class="card reveal" id="stop-02">
       <div class="thumb">
         <img src="images/kek-lok-si.jpg" alt="Kek Lok Si Temple illuminated at dusk" loading="lazy" />
         <div class="num">02</div>
@@ -395,7 +405,7 @@
       </div>
     </article>
 
-    <article class="card reveal">
+    <article class="card reveal" id="stop-03">
       <div class="thumb">
         <img src="images/tea-house.jpg" alt="Traditional Chinese gongfu tea set being poured" loading="lazy" />
         <div class="num">03</div>
@@ -418,7 +428,7 @@
       </div>
     </article>
 
-    <article class="card reveal">
+    <article class="card reveal" id="stop-04">
       <div class="thumb">
         <img src="images/kimberley-market.jpg" alt="Hawker stalls on Kimberley Street, George Town" loading="lazy" />
         <div class="num">04</div>
@@ -441,7 +451,7 @@
       </div>
     </article>
 
-    <article class="card reveal">
+    <article class="card reveal" id="stop-05">
       <div class="thumb">
         <img src="images/food-court.jpg" alt="Penang hawker stall cooking over a hot wok" loading="lazy" />
         <div class="num">05</div>
@@ -464,7 +474,7 @@
       </div>
     </article>
 
-    <article class="card reveal">
+    <article class="card reveal" id="stop-06">
       <div class="thumb">
         <img src="images/karpal-singh.jpg" alt="Karpal Singh Drive seafront promenade curving along the water" loading="lazy" />
         <div class="num">06</div>
@@ -487,7 +497,7 @@
       </div>
     </article>
 
-    <article class="card reveal">
+    <article class="card reveal" id="stop-07">
       <div class="thumb">
         <img src="images/chew-jetty.jpg" alt="Chew Jetty stilt village over the water in George Town" loading="lazy" />
         <div class="num">07</div>
@@ -510,7 +520,7 @@
       </div>
     </article>
 
-    <article class="card reveal">
+    <article class="card reveal" id="stop-08">
       <div class="thumb">
         <img src="images/gurney.jpg" alt="Towers along Gurney Drive lit up at night" loading="lazy" />
         <div class="num">08</div>
@@ -533,7 +543,7 @@
       </div>
     </article>
 
-    <article class="card reveal">
+    <article class="card reveal" id="stop-09">
       <div class="thumb">
         <img src="images/cendol.jpg" alt="Two bowls of Penang cendol with green rice-flour jelly and coconut milk" loading="lazy" />
         <div class="num">09</div>
@@ -573,9 +583,9 @@
   <div class="eyebrow reveal">Do These Together</div>
   <h2 class="reveal">Some stops are neighbours.</h2>
   <p class="lede reveal">
-    Penang is small. Several of these sit within minutes of each other, so you can pick a
-    cluster, spend an easy half-day there, and never feel rushed. Take whichever grouping
-    suits the mood.
+    Penang is small. These groupings sit close enough to chain together in one outing —
+    some within a few minutes' walk, others a short ride apart — so you can take a cluster,
+    spend an easy half-day on it, and never feel rushed. Tap any stop to jump to its full details.
   </p>
 
   <div class="clusters">
@@ -585,26 +595,26 @@
         <span class="cluster-tag t-nature">Air Itam</span>
         <h4>The Hill &amp; The Temple</h4>
       </div>
-      <p class="cluster-note">Roughly ten minutes apart on the same hillside — it would be odd to do one without the other.</p>
+      <p class="cluster-note">Roughly ten minutes apart on the same hillside — easy to string together, but neither one deserves to be rushed.</p>
       <ul class="cluster-list">
-        <li><span>01</span> Penang Hill <em>· cool air, big view</em></li>
-        <li><span>02</span> Kek Lok Si Temple <em>· gold, incense, pagoda</em></li>
+        <li><a href="#stop-01"><span>01</span> Penang Hill <em>· cool air, big view</em></a></li>
+        <li><a href="#stop-02"><span>02</span> Kek Lok Si Temple <em>· gold, incense, pagoda</em></a></li>
       </ul>
-      <p class="cluster-tip">Best as a morning: hill first while it is cool and clear, temple on the way back down.</p>
+      <p class="cluster-tip">Either one morning for both — hill first while it is cool, temple on the way down — or give each its own morning and take all the time you want with the scenery.</p>
     </article>
 
     <article class="cluster reveal">
       <div class="cluster-head">
         <span class="cluster-tag t-heritage">George Town Core</span>
-        <h4>The Walkable Heritage Loop</h4>
+        <h4>Heritage, Then Dinner</h4>
       </div>
-      <p class="cluster-note">All inside the UNESCO zone and close enough to do on foot — no car needed once you are parked.</p>
+      <p class="cluster-note">All three sit inside the UNESCO quarter, but this is a spread-out one — roughly 1.5 km end to end, so budget 20&ndash;25 minutes on foot in full heat. A bicycle, trishaw or a short Grab hop between them is the kinder option.</p>
       <ul class="cluster-list">
-        <li><span>07</span> Chew Jetty <em>· village on stilts</em></li>
-        <li><span>09</span> Cendol near Komtar <em>· the cold-down break</em></li>
-        <li><span>04</span> Kimberley Street Night Market <em>· dinner on foot</em></li>
+        <li><a href="#stop-07"><span>07</span> Chew Jetty <em>· village on stilts</em></a></li>
+        <li><a href="#stop-09"><span>09</span> Cendol near Komtar <em>· the cold-down break</em></a></li>
+        <li><a href="#stop-04"><span>04</span> Kimberley Street Night Market <em>· dinner on foot</em></a></li>
       </ul>
-      <p class="cluster-tip">Jetty at golden hour, cendol to survive the walk back, then straight into Kimberley as the stalls light up.</p>
+      <p class="cluster-tip">Jetty at golden hour, then cendol once the sun is off the streets — those two are the long leg. Kimberley is only a few minutes further, so finish there as the stalls light up.</p>
     </article>
 
     <article class="cluster reveal">
@@ -614,8 +624,8 @@
       </div>
       <p class="cluster-note">Both on the same southeastern stretch of coast, a short hop from each other.</p>
       <ul class="cluster-list">
-        <li><span>06</span> Karpal Singh Drive <em>· water, bridge, breeze</em></li>
-        <li><span>05</span> Sungai Pinang Food Court <em>· where locals eat</em></li>
+        <li><a href="#stop-06"><span>06</span> Karpal Singh Drive <em>· water, bridge, breeze</em></a></li>
+        <li><a href="#stop-05"><span>05</span> Sungai Pinang Food Court <em>· where locals eat</em></a></li>
       </ul>
       <p class="cluster-tip">Walk the promenade while the light drops, then eat five minutes away once the woks fire up.</p>
     </article>
@@ -627,9 +637,9 @@
       </div>
       <p class="cluster-note">Three very different moods within a few minutes of each other — cold air, slow tea and an open seafront.</p>
       <ul class="cluster-list">
-        <li><span>08</span> Gurney Plaza <em>· shopping, cinema, cold air</em></li>
-        <li><span>03</span> Qing Huan Chinese Tea House <em>· slow tea, real conversation</em></li>
-        <li><span>—</span> Gurney Drive promenade <em>· sunset walk next door</em></li>
+        <li><a href="#stop-08"><span>08</span> Gurney Plaza <em>· shopping, cinema, cold air</em></a></li>
+        <li><a href="#stop-03"><span>03</span> Qing Huan Chinese Tea House <em>· slow tea, real conversation</em></a></li>
+        <li><div class="plain"><span>—</span> Gurney Drive promenade <em>· sunset walk next door</em></div></li>
       </ul>
       <p class="cluster-tip">Browse the mall through the hottest hours, sit down for tea as it cools, then walk the promenade at sunset.</p>
     </article>
